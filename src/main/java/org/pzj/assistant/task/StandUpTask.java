@@ -10,7 +10,7 @@ import java.awt.*;
 @Component
 public class StandUpTask {
 
-    @Scheduled(cron = "10 0/1 * * * ?")
+    @Scheduled(cron = "0/31 * * * * ?")
     public void standUpTask() {
         new Thread(()->{
             System.out.println("--------久坐--------"+ GetTime.getNowTime());
@@ -19,6 +19,6 @@ public class StandUpTask {
             }catch (AWTException e){
                 e.printStackTrace();
             }
-        });
+        }).start();
     }
 }

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 public class MyTrayIcon extends JFrame {
     private static final String IMAGE_PATH = "/statics/images/faz.png";
+    private static final SystemTray tray = SystemTray.getSystemTray();
 
     public MyTrayIcon(){
         setTitle("选项卡面板");
@@ -30,15 +31,19 @@ public class MyTrayIcon extends JFrame {
      * @param leven
      * @throws AWTException
      */
-    public static void displayTray(String caption,String text,MessageType leven) throws AWTException {
-        SystemTray tray = SystemTray.getSystemTray();
+    public static synchronized void displayTray(String caption,String text,MessageType leven) throws AWTException {
         Image image = Toolkit.getDefaultToolkit().createImage(MyTrayIcon.class.getResource(IMAGE_PATH));
         java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(image, caption);
         trayIcon.setImageAutoSize(true);
         trayIcon.setToolTip("健康小助手");
         tray.add(trayIcon);
         trayIcon.displayMessage(caption, text, leven);
-        tray.remove(trayIcon);
+        try {
+            Thread.sleep(6*1000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        tray.remove(trayIcon); // 需要休眠几秒才能关闭，否则会直接关闭tray导致程序直接退出
     }
 
     /**
@@ -46,7 +51,7 @@ public class MyTrayIcon extends JFrame {
      * @throws AWTException
      */
     public static void addTray() throws AWTException {
-        SystemTray tray = SystemTray.getSystemTray();
+
         Image image = Toolkit.getDefaultToolkit().createImage(MyTrayIcon.class.getResource(IMAGE_PATH));
         PopupMenu pop = new PopupMenu();//创建弹出式菜单
         MenuItem menu = new MenuItem("退出");//创建菜单项

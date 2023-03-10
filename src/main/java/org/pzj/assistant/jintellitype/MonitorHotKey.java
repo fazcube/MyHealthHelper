@@ -49,7 +49,7 @@ public class MonitorHotKey implements ApplicationRunner {
             }
         };
         JIntellitype.getInstance().addHotKeyListener(hotkeyListener); // 添加监听器
-        MyTrayIcon.addTray(); // 初始化状态栏图标
+//        MyTrayIcon.addTray(); // 初始化状态栏图标
         log.info("==========快捷键监听初始化完成==========");
     }
 }

@@ -10,7 +10,7 @@ import java.awt.*;
 @Component
 public class WaterTask {
 
-    @Scheduled(cron = "*/30 * * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void waterTask(){
         new Thread(()->{
             System.out.println("--------喝水--------"+ GetTime.getNowTime());
@@ -19,6 +19,6 @@ public class WaterTask {
             }catch (AWTException e){
                 e.printStackTrace();
             }
-        });
+        }).start();
     }
 }
