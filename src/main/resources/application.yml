@@ -1,0 +1,8 @@
+spring:
+  devtools:
+    livereload:
+      port: 11170
+  task:
+    scheduling:
+      pool:
+        size: 4
